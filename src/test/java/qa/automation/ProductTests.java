@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.LoginPage;
 import pages.ProductsPage;
-
 import java.time.Duration;
 import java.util.Collections;
 import java.util.NoSuchElementException;
