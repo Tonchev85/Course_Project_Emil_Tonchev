@@ -11,7 +11,7 @@ public class LoginPage {
     @FindBy(id = "user-name")
     private WebElement userNameInput;
 
-    @FindBy(css = "[placeholder=password]")
+    @FindBy(css = "[placeholder=Password]")
     private WebElement passwordInput;
 
     @FindBy(xpath = "//input[@value='Login']")

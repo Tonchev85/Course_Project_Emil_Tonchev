@@ -5,10 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+
+import java.time.Duration;
 
 public class ProductsPage {
     protected WebDriver driver;
     private static final String ADD_TO_CART_LOCATOR = "//button[@id='add-to-cart-sauce-labs-%s']";
+    private static final String REMOVE_TO_CART_LOCATOR = "//button[@id='remove-sauce-labs-%s']";
 
     @FindBy (className = "shopping_cart_link")
     private WebElement shoppingCartLink;
@@ -27,7 +32,25 @@ public class ProductsPage {
         addToCartButton.click();
     }
 
+    public boolean removeItemFromTheCart(String productName){
+        String xpathOfElementToBeAdded = String.format(REMOVE_TO_CART_LOCATOR, productName);
+        FluentWait fluentWait = new FluentWait(driver)
+                .withTimeout(Duration.ofSeconds(3));
+        WebElement removeButton = driver.findElement(By.xpath(xpathOfElementToBeAdded));
+        fluentWait.until(ExpectedConditions.elementToBeClickable(removeButton));
+        if (removeButton.getText().equals("Remove")){
+            removeButton.click();
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public int getItemsInTheCart(){
-        return Integer.parseInt(shoppingCartCounter.getText());
+        if (shoppingCartCounter.getText().isEmpty()){
+            return 0;
+        }else {
+            return Integer.parseInt(shoppingCartCounter.getText());
+        }
     }
 }
