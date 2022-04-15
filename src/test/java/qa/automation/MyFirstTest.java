@@ -44,6 +44,7 @@ public class MyFirstTest {
 
         WebElement menuButton = driver.findElement(By.id("react-burger-menu-btn"));
         Assert.assertTrue(menuButton.isDisplayed());
+
     }
 
 }

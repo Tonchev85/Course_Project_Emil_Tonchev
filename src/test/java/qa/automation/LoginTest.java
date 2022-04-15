@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.LoginPage;
+import pages.ProductsPage;
 import utils.CsvHelper;
 
 import java.io.IOException;
@@ -51,18 +53,21 @@ public class LoginTest extends TestUtil {
     public void successfulLogin(String userName, String password){
        // driver.get("https://www.saucedemo.com/");
 
-        WebElement username = driver.findElement(By.id("user-name"));
-        username.click();
-        username.sendKeys(userName);
+//        WebElement username = driver.findElement(By.id("user-name"));
+//        username.click();
+//        username.sendKeys(userName);
+//
+//        WebElement passwordInput = driver.findElement(By.name("password"));
+//        passwordInput.click();
+//        passwordInput.sendKeys(password);
+//
+//        WebElement loginBtn = driver.findElement(By.cssSelector("[value=Login]"));
+//        loginBtn.click();
+//
+//        WebElement menuButton = driver.findElement(By.id("react-burger-menu-btn"));
+//        Assert.assertTrue(menuButton.isDisplayed());
 
-        WebElement passwordInput = driver.findElement(By.name("password"));
-        passwordInput.click();
-        passwordInput.sendKeys(password);
-
-        WebElement loginBtn = driver.findElement(By.cssSelector("[value=Login]"));
-        loginBtn.click();
-
-        WebElement menuButton = driver.findElement(By.id("react-burger-menu-btn"));
-        Assert.assertTrue(menuButton.isDisplayed());
+        LoginPage loginPage = new LoginPage(driver);
+        ProductsPage productsPage = loginPage.login(userName, password);
     }
 }
