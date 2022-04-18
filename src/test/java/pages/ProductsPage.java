@@ -21,6 +21,10 @@ public class ProductsPage {
     @FindBy (className = "shopping_cart_badge")
     private WebElement shoppingCartCounter;
 
+    @FindBy (id = "checkout")
+    private WebElement checkoutBtn;
+
+
     public ProductsPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -52,5 +56,20 @@ public class ProductsPage {
         }else {
             return Integer.parseInt(shoppingCartCounter.getText());
         }
+    }
+
+    public boolean checkout (String checkoutButton){
+        shoppingCartLink.click();
+        checkoutBtn.click();
+        FluentWait fluentWait = new FluentWait(driver).withTimeout(Duration.ofSeconds(5));
+        WebElement submitBtn = driver.findElement(By.id("continue"));
+        fluentWait.until(ExpectedConditions.elementToBeClickable(submitBtn));
+        submitBtn.click();
+        return true;
+    }
+
+    public boolean errorMessageIsDisplayed (String errorText){
+        WebElement errorMessage = driver.findElement(By.xpath("//*[text()='Error: First Name is required']"));
+        return errorMessage.isDisplayed();
     }
 }

@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,6 +34,16 @@ public class LoginPage {
         loginBtn.click();
 
         return new ProductsPage(driver);
+    }
+
+    public boolean menuBtn (String menuIsDisplayed){
+        WebElement menuButton = driver.findElement(By.id("react-burger-menu-btn"));
+        return menuButton.isDisplayed();
+    }
+
+    public  boolean errorLogin (String errorMessage){
+        WebElement errorLoginLabel = driver.findElement(By.xpath("//*[text()='Epic sadface: Username and password do not match any user in this service']"));
+        return errorLoginLabel.isDisplayed();
     }
 
 }
