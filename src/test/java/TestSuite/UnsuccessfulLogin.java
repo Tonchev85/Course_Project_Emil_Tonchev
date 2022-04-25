@@ -15,7 +15,7 @@ public class UnsuccessfulLogin extends TestUtil {
 
     @DataProvider(name = "wrongUsersList")
     public Object [][] getWrongUsers() throws IOException, CsvException {
-        return CsvHelper.readCsvFile("src/test/resources/user.csv");
+        return CsvHelper.readCsvFile("src/test/resources/wrongUsers.csv");
 
     }
 

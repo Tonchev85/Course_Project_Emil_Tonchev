@@ -24,6 +24,21 @@ public class ProductsPage {
     @FindBy (id = "checkout")
     private WebElement checkoutBtn;
 
+    @FindBy (id = "first-name")
+    private WebElement firstName;
+
+    @FindBy (id = "last-name")
+    private WebElement lastName;
+
+    @FindBy (id = "postal-code")
+    private WebElement postalCode;
+
+    @FindBy (id = "finish")
+    private WebElement finishBtn;
+
+    @FindBy (id = "continue")
+    private  WebElement continueBtn;
+
 
     public ProductsPage(WebDriver driver){
         this.driver = driver;
@@ -58,18 +73,44 @@ public class ProductsPage {
         }
     }
 
-    public boolean checkout (String checkoutButton){
+    public void VerifiedCheckout (String checkoutButton){
         shoppingCartLink.click();
         checkoutBtn.click();
         FluentWait fluentWait = new FluentWait(driver).withTimeout(Duration.ofSeconds(5));
         WebElement submitBtn = driver.findElement(By.id("continue"));
         fluentWait.until(ExpectedConditions.elementToBeClickable(submitBtn));
         submitBtn.click();
-        return true;
     }
 
     public boolean errorMessageIsDisplayed (String errorText){
         WebElement errorMessage = driver.findElement(By.xpath("//*[text()='Error: First Name is required']"));
         return errorMessage.isDisplayed();
+    }
+
+    public ProductsPage login (String firstname, String lastname, String postcode){
+        firstName.click();
+        firstName.sendKeys(firstname);
+
+        lastName.click();
+        lastName.sendKeys(lastname);
+
+        postalCode.click();
+        postalCode.sendKeys(postcode);
+
+        return new ProductsPage(driver);
+    }
+
+    public boolean ponyExpress (String img){
+        WebElement ponyImg = driver.findElement(By.className("pony_express"));
+        return  ponyImg.isDisplayed();
+    }
+
+    public void Checkout (String checkBtn){
+        shoppingCartLink.click();
+        checkoutBtn.click();
+    }
+    public void Continue (String Btn){
+        continueBtn.click();
+        finishBtn.click();
     }
 }

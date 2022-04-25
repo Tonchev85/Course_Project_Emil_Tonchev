@@ -6,7 +6,8 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.ProductsPage;
 
-public class CheckoutTest extends TestUtil {
+
+public class VerifiedCheckoutTest extends TestUtil {
 
     @Test
     public void addItemToCheckout() {
@@ -16,13 +17,8 @@ public class CheckoutTest extends TestUtil {
         productsPage.addItemToTheCart("backpack");
         productsPage.addItemToTheCart("bolt-t-shirt");
 
-        productsPage.Checkout("Click buttons");
+        productsPage.VerifiedCheckout("Click button and fluent wait");
 
-        ProductsPage productsPage1 = new ProductsPage(driver);
-        ProductsPage productsPage2 = productsPage1.login("Emil", "Tonchev", "1619");
-
-        productsPage.Continue("Click Buttons");
-
-        Assert.assertTrue(productsPage2.ponyExpress("Pony picture"));
+        Assert.assertTrue(productsPage.errorMessageIsDisplayed("First Name is required"));
     }
 }
